@@ -4,11 +4,6 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { server } from './server/browser.ts';
 
-/**
- * TODO: Production 이 아닌 환경에서 워커를 실행하도록 설정한다.
- *
- * onUnhandledRequest
- */
 server.start({
   onUnhandledRequest: 'bypass',
 });
