@@ -10,12 +10,10 @@ server.start({
   onUnhandledRequest: 'bypass',
 });
 
-const browserRouter = createBrowserRouter(routes);
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider>
-      <RouterProvider router={browserRouter} />
+      <RouterProvider router={createBrowserRouter(routes)} />;
     </QueryClientProvider>
   </React.StrictMode>
 );

@@ -1,9 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+
 const HomePage = () => {
   /** FIXME: API Response 로 변경. */
   const hasSubscribe = false;
 
+  const navigate = useNavigate();
+
   const handleClickSubscribtionCTA = () => {
-    // navigate
+    navigate('/new/sign-up');
   };
 
   return (

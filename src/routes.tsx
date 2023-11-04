@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Navigate, Outlet, RouteObject } from 'react-router-dom';
 
 import { HomePage, SubscriptionStepPage } from './app';
@@ -5,6 +6,11 @@ import { HomePage, SubscriptionStepPage } from './app';
 export const routes: RouteObject[] = [
   {
     path: '/',
+    element: (
+      <Suspense fallback={'loading'}>
+        <Outlet />
+      </Suspense>
+    ),
     children: [
       {
         index: true,
@@ -12,7 +18,6 @@ export const routes: RouteObject[] = [
       },
       {
         path: 'new',
-        element: <Outlet />,
         children: [
           {
             path: ':step',
