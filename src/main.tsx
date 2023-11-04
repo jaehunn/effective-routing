@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import App from './App.tsx';
 import { server } from './server/browser.ts';
+import { routes } from './routes';
 
 server.start({
   onUnhandledRequest: 'bypass',
 });
 
+const browserRouter = createBrowserRouter(routes);
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={browserRouter} />
   </React.StrictMode>
 );
