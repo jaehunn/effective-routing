@@ -1,10 +1,29 @@
-import { RouteObject } from 'react-router-dom';
+import { Navigate, Outlet, RouteObject } from 'react-router-dom';
 
-import HomePage from './app/page';
+import { HomePage, SubscriptionStepPage } from './app';
 
 export const routes: RouteObject[] = [
   {
     path: '/',
-    element: <HomePage />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: 'new',
+        element: <Outlet />,
+        children: [
+          {
+            path: ':step',
+            element: <SubscriptionStepPage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <Navigate replace to="/" />,
   },
 ];
