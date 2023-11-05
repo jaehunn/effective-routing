@@ -29,7 +29,7 @@
     /** Type Definitions */
     "types": ["vitest/globals"]
   },
-  "include": ["src", "vitest-setup.ts"],
+  "include": ["src", "vitest-setup.ts", "**/*.spec.?(c|m)[jt]sx"],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
