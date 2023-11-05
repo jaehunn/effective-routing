@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 
-export const HomePage = lazy(() => import('./page'));
+export { default as HomeLayout } from './layout';
+export { default as HomeErrorPage } from './error';
 
-export const SubscriptionStepPage = lazy(() => import('./new/[slug]/page'));
+export const HomePage = lazy(() => import('./page'));

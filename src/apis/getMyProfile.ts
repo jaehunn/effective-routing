@@ -7,7 +7,7 @@ type Params = {
 type Response = {
   data: {
     user: {
-      id: number;
+      id: string;
       name: string;
       phone: string;
     };

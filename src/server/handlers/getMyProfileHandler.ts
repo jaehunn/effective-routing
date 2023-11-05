@@ -4,7 +4,7 @@ import getMyProfile from '~/apis/getMyProfile';
 
 export const SUBSCRIBED_DATA: Awaited<ReturnType<typeof getMyProfile>>['data'] = {
   user: {
-    id: 1,
+    id: 'jaehun13',
     name: 'Jaehun',
     phone: '010-1234-4321',
   },
@@ -13,7 +13,7 @@ export const SUBSCRIBED_DATA: Awaited<ReturnType<typeof getMyProfile>>['data'] =
 
 export const UNSUBSCRIBED_DATA: Awaited<ReturnType<typeof getMyProfile>>['data'] = {
   user: {
-    id: 2,
+    id: 'yoonjung12',
     name: 'Yoonjung',
     phone: '010-5678-8765',
   },

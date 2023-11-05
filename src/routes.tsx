@@ -1,27 +1,35 @@
 import { Suspense } from 'react';
-import { Navigate, Outlet, RouteObject } from 'react-router-dom';
+import { Navigate, RouteObject } from 'react-router-dom';
 
-import { HomePage, SubscriptionStepPage } from './app';
+import { HomePage, HomeLayout, HomeErrorPage } from './app';
+import { StepErrorPage, StepLayout, StepPage } from './app/new/[slug]';
 
 export const routes: RouteObject[] = [
   {
     path: '/',
-    element: (
-      <Suspense fallback={'loading'}>
-        <Outlet />
-      </Suspense>
-    ),
+    element: <HomeLayout />,
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: (
+          <Suspense fallback={'loading'}>
+            <HomePage />
+          </Suspense>
+        ),
+        errorElement: <HomeErrorPage />,
       },
       {
         path: 'new',
+        element: <StepLayout />,
         children: [
           {
             path: ':step',
-            element: <SubscriptionStepPage />,
+            element: (
+              <Suspense fallback={'loading'}>
+                <StepPage />
+              </Suspense>
+            ),
+            errorElement: <StepErrorPage />,
           },
         ],
       },
