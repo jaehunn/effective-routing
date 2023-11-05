@@ -1,10 +1,10 @@
+import { PropsWithChildren } from 'react';
 import {
   QueryClientProvider as ReactQueryClientProvider,
   QueryClient,
 } from '@tanstack/react-query';
-import { PropsWithChildren } from 'react';
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,

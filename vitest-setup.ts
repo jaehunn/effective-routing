@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom/vitest';
+import { queryClient } from '~/lib';
 
 import { server } from '~/server/node';
 
@@ -10,6 +11,8 @@ beforeAll(() =>
 
 afterEach(() => {
   server.resetHandlers();
+
+  queryClient.resetQueries();
 });
 
 afterAll(() => {
