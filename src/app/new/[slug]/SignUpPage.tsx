@@ -26,8 +26,6 @@ const SignUpPage = () => {
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(isDisabledCTA);
-
     navigate('/new/plan', {
       state: {
         data: {

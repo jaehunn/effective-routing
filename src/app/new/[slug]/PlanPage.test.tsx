@@ -1,80 +1,71 @@
-// import { MemoryRouter } from 'react-router-dom';
-// import { screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-// import SignUpPage from './SignUpPage';
-// import { render } from '~/testHelpers';
-// import { SUBSCRIBED_DATA, UNSUBSCRIBED_DATA } from '~/server/handlers/getMyProfileHandler';
+import PlanPage from './PlanPage';
+import { render } from '~/testHelpers';
+import { UNSUBSCRIBED_DATA } from '~/server/handlers/getMyProfileHandler';
 
-// const mocks = vi.hoisted(() => {
-//   return {
-//     useGetMyProfile: vi.fn(),
-//   };
-// });
+const mocks = vi.hoisted(() => {
+  return {
+    useGetMyProfile: vi.fn(),
+  };
+});
 
-// vi.mock('./useGetMyProfile', () => ({
-//   useGetMyProfile: mocks.useGetMyProfile,
-// }));
+vi.mock('useGetMyProfile', () => ({
+  useGetMyProfile: mocks.useGetMyProfile,
+}));
 
-// describe('SignUpPage', () => {
-//   const renderHomePage = () => {
-//     render(
-//       <MemoryRouter initialEntries={['/']}>
-//         <SignUpPage />
-//       </MemoryRouter>
-//     );
-//   };
+describe('PlanPage', () => {
+  const renderPlanPage = () => {
+    render(
+      <MemoryRouter initialEntries={['/new/plan']}>
+        <PlanPage />
+      </MemoryRouter>
+    );
+  };
 
-//   beforeEach(() => {
-//     vi.clearAllMocks();
-//   });
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
-//   it('사용자 정보가 없으면, "사용자 정보가 없습니다." 를 노출한다.', async () => {
-//     mocks.useGetMyProfile.mockImplementation(() => {
-//       return {
-//         data: undefined,
-//       };
-//     });
+  it('구독하고 있지 않다면, 구독 플랜을 선택할 수 있다.', async () => {
+    mocks.useGetMyProfile.mockImplementation(() => {
+      return {
+        data: UNSUBSCRIBED_DATA,
+      };
+    });
 
-//     renderHomePage();
+    renderPlanPage();
 
-//     await waitFor(() => {
-//       screen.getByText('사용자 정보가 없습니다.');
-//     });
-//   });
+    const select = (await screen.findByRole('combobox', {
+      name: /Plan/,
+    })) as HTMLSelectElement;
 
-//   it('사용자가 구독을 하지않은 상태라면, "구독하러 가기" CTA 가 보인다.', async () => {
-//     mocks.useGetMyProfile.mockImplementation(() => {
-//       return {
-//         data: UNSUBSCRIBED_DATA,
-//       };
-//     });
+    userEvent.selectOptions(select, 'STANDARD');
 
-//     renderHomePage();
+    await waitFor(() => {
+      expect(select.value).toBe('STANDARD');
+    });
+  });
 
-//     await waitFor(() => {
-//       screen.getByRole('button', {
-//         name: '구독하러 가기',
-//       });
-//     });
-//   });
+  it('구독하고 있지 않다면, 구독 기간을 선택할 수 있다.', async () => {
+    mocks.useGetMyProfile.mockImplementation(() => {
+      return {
+        data: UNSUBSCRIBED_DATA,
+      };
+    });
 
-//   it('사용자가 구독을 한 상태라면, "환영합니다" 를 노출한다.', async () => {
-//     mocks.useGetMyProfile.mockImplementation(() => {
-//       return {
-//         data: SUBSCRIBED_DATA,
-//       };
-//     });
+    renderPlanPage();
 
-//     renderHomePage();
+    const select = (await screen.findByRole('combobox', {
+      name: /Period/,
+    })) as HTMLSelectElement;
 
-//     await waitFor(() => {
-//       screen.getByText('환영합니다.');
-//     });
-//   });
-// });
+    userEvent.selectOptions(select, 'MONTH');
 
-describe('', () => {
-  it('', () => {
-    // ...
+    await waitFor(() => {
+      expect(select.value).toBe('MONTH');
+    });
   });
 });
