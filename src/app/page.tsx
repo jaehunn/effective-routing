@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
+import { useGetMyProfile } from './useGetMyProfile';
+
 const HomePage = () => {
-  /** FIXME: API Response 로 변경. */
-  const hasSubscribe = false;
+  const { data: myProfileData } = useGetMyProfile({
+    uid: 1,
+  });
 
   const navigate = useNavigate();
 
@@ -10,9 +13,13 @@ const HomePage = () => {
     navigate('/new/sign-up');
   };
 
+  if (!myProfileData) {
+    return <div>사용자 정보가 없습니다.</div>;
+  }
+
   return (
     <div>
-      {hasSubscribe ? (
+      {myProfileData?.hasSubscribed ? (
         <div>환영합니다.</div>
       ) : (
         <button type="button" onClick={handleClickSubscribtionCTA}>
