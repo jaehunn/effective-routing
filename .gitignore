@@ -29,3 +29,12 @@ dist-ssr
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Unused Zero Install
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
