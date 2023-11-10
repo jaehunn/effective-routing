@@ -27,7 +27,7 @@
     },
 
     /** Type Definitions */
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src", "vitest-setup.ts", "**/*.spec.?(c|m)[jt]sx"],
   "exclude": ["node_modules"],

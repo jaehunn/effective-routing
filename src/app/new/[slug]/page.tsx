@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import SignUpPage from './SignUpPage';
 import PlanPage from './PlanPage';
 import AddonsPage from './AddonsPage';
+import WrapUpPage from './WrapUpPage';
+import DonePage from './DonePage';
 
 export const STEPS = {
   /** 구독 신청자 정보 입력 */
@@ -15,10 +17,10 @@ export const STEPS = {
   addons: <AddonsPage />,
 
   /** 구독 신청 정보 요약 */
-  'wrap-up': <div>wrap-up</div>,
+  'wrap-up': <WrapUpPage />,
 
   /** 구독 완료 */
-  done: <div>done</div>,
+  done: <DonePage />,
 };
 
 export type Params = {
