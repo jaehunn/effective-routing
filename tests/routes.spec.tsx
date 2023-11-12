@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 
 test.describe('routes', () => {
-  test('/ 로 접근하면, HomePage 가 렌더링된다.', async ({ page }) => {
+  test('/ 로 접근하면, AppPage 가 렌더링된다.', async ({ page }) => {
     await page.goto('/');
 
     await page.waitForTimeout(500);
@@ -27,7 +27,7 @@ test.describe('routes', () => {
     await page.waitForURL('/new/sign-up');
   });
 
-  test('정의되지않은 Path 로 접근하면, HomePage 가 렌더링된다.', async ({ page }) => {
+  test('정의되지않은 Path 로 접근하면, AppPage 가 렌더링된다.', async ({ page }) => {
     await page.goto('/aaa');
 
     await page.waitForTimeout(500);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 
-import { useGetMyProfile } from './useGetMyProfile';
+import { MyProfileData } from './useGetMyProfile';
 
 type FormValues = {
   plan: keyof typeof PLAN_VALUES;
@@ -19,17 +19,15 @@ const PERIOD_VALUES = {
   YEAR: '1년',
 } as const;
 
+type OutletProps = {
+  myProfileData: MyProfileData;
+};
+
 const PlanPage = () => {
+  const { myProfileData } = useOutletContext<OutletProps>();
+
   const navigate = useNavigate();
   const location = useLocation();
-  const { data: myProfileData } = useGetMyProfile(
-    {
-      uid: location?.state?.data?.id,
-    },
-    {
-      enabled: !!location?.state?.data?.id,
-    }
-  );
 
   const [formValues, setFormValues] = useState<FormValues>({
     plan: 'PREMIUM',
@@ -39,7 +37,7 @@ const PlanPage = () => {
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    navigate('/new/addons', {
+    navigate('/new/wrap-up', {
       state: {
         data: {
           ...location?.state?.data,

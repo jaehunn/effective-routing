@@ -9,6 +9,9 @@ export const useGetMyProfile = (
     queryKey: ['SUBSCRIPTION', 'MY_PROFILE', { ...params }],
     queryFn: () => getMyProfile(params),
     select: (data) => data?.data,
+    throwOnError: true,
     ...options,
   });
 };
+
+export type MyProfileData = Awaited<ReturnType<typeof useGetMyProfile>>['data'];

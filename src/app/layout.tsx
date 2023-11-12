@@ -1,11 +1,20 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-const HomeLayout = () => {
+const AppLayout = () => {
   return (
-    <div>
-      <Outlet />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
+      <Suspense fallback={''}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
 
-export default HomeLayout;
+export default AppLayout;

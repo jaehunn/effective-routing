@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { STEPS, Params } from './page';
+import { Params } from './page';
+import { STEPS } from './layout';
 
 export const useRouteGuard = (params: Partial<Params>) => {
   const navigate = useNavigate();

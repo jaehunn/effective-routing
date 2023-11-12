@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const HomePage = () => {
+const AppPage = () => {
   const navigate = useNavigate();
 
   const handleClickSubscribtionCTA = () => {
@@ -16,4 +16,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default AppPage;

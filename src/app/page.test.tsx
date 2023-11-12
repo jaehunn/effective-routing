@@ -1,20 +1,20 @@
 import { MemoryRouter } from 'react-router-dom';
 import { screen, waitFor } from '@testing-library/react';
 
-import { HomePage } from '.';
+import { AppPage } from '.';
 import { render } from '~/testHelpers';
 
-describe('HomePage', () => {
-  const renderHomePage = () => {
+describe('AppPage', () => {
+  const renderAppPage = () => {
     render(
       <MemoryRouter initialEntries={['/']}>
-        <HomePage />
+        <AppPage />
       </MemoryRouter>
     );
   };
 
   it('"구독하러 가기" CTA 가 보인다.', async () => {
-    renderHomePage();
+    renderAppPage();
 
     await waitFor(() => {
       screen.getByRole('button', {

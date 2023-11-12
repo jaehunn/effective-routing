@@ -8,13 +8,18 @@ import { UNSUBSCRIBED_DATA } from '~/server/handlers/getMyProfileHandler';
 
 const mocks = vi.hoisted(() => {
   return {
-    useGetMyProfile: vi.fn(),
+    useOutletContext: vi.fn(),
   };
 });
 
-vi.mock('useGetMyProfile', () => ({
-  useGetMyProfile: mocks.useGetMyProfile,
-}));
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+
+  return {
+    ...actual!,
+    useOutletContext: mocks.useOutletContext,
+  };
+});
 
 describe('PlanPage', () => {
   const renderPlanPage = () => {
@@ -30,9 +35,9 @@ describe('PlanPage', () => {
   });
 
   it('구독하고 있지 않다면, 구독 플랜을 선택할 수 있다.', async () => {
-    mocks.useGetMyProfile.mockImplementation(() => {
+    mocks.useOutletContext.mockImplementation(() => {
       return {
-        data: UNSUBSCRIBED_DATA,
+        myProfileData: UNSUBSCRIBED_DATA,
       };
     });
 
@@ -50,9 +55,9 @@ describe('PlanPage', () => {
   });
 
   it('구독하고 있지 않다면, 구독 기간을 선택할 수 있다.', async () => {
-    mocks.useGetMyProfile.mockImplementation(() => {
+    mocks.useOutletContext.mockImplementation(() => {
       return {
-        data: UNSUBSCRIBED_DATA,
+        myProfileData: UNSUBSCRIBED_DATA,
       };
     });
 

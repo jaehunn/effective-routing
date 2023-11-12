@@ -21,9 +21,9 @@ export const UNSUBSCRIBED_DATA: Awaited<ReturnType<typeof getMyProfile>>['data']
 };
 
 export const getMyProfileHandler: Parameters<typeof rest.get>[1] = (req, res, ctx) => {
-  const url = new URL(req.url);
+  const url = new URL(req?.url);
 
-  const uid = url.searchParams.get('uid');
+  const uid = url.searchParams?.get('uid');
 
   if (uid === `${SUBSCRIBED_DATA['user']['id']}`) {
     return res(
@@ -43,5 +43,5 @@ export const getMyProfileHandler: Parameters<typeof rest.get>[1] = (req, res, ct
     );
   }
 
-  return res(ctx.status(404));
+  return res(ctx.status(200));
 };
