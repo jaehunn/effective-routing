@@ -13,10 +13,9 @@ export const routes: RouteObject[] = [
     element: <AppLayout />,
 
     /**
-     * appLoader 그리고 children loader, element 에서 발생한 throw Error 를 감지할 수 있다.
+     * 발생하는 Error 를 감지할 수 있다.
      *
-     * <AppLayout /> 에서 발생한 에러는 잡을 수 없다.
-     * -> Root ErrorElement 를 만들어주기보다. appLoader 에서 에러를 던지고, AppLayout 은 Layout(UI) 을 잡기위한 용도로 사용하자.
+     *  Element 또는 Layout 컴포넌트에서 발생하는 에러는 isRouteErrorResponse 로 감지되지않는다.
      **/
     errorElement: <AppErrorPage />,
     children: [
@@ -28,6 +27,7 @@ export const routes: RouteObject[] = [
         path: 'new',
         loader: stepLoader,
         element: <StepLayout />,
+        // errorElement: <AppErrorPage />,
         children: [
           /** Path Params 로 받지않고, 명확하게 정의하면 RouteGuard 를 만들지 않아도 된다.  */
           {

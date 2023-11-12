@@ -1,4 +1,4 @@
-import { Outlet, json, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { useGetMyProfile } from './useGetMyProfile';
 import { useEffect } from 'react';
@@ -26,14 +26,7 @@ const StepLayout = () => {
     if (isEnabledGetMyProfile) {
       /** Enabled 한 상태에서 검증 */
       if (!myProfileData) {
-        throw json(
-          {
-            message: '사용자 정보가 없습니다.',
-          },
-          {
-            status: 400,
-          }
-        );
+        throw Error(`사용자 정보가 없습니다.`);
       }
     }
   }, [isEnabledGetMyProfile, myProfileData]);

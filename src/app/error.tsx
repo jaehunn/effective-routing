@@ -7,9 +7,12 @@ const AppErrorPage = () => {
   const error = useRouteError();
 
   /**
-   * Throw Error
+   * Throw Error (in loader)
    *
-   * TODO: Layout 에서 던진 throw json 을 잡지 못하는 이슈.
+   * Layout 에서 던진 throw json 을 잡지 못함. (컴포넌트에서 던진 에러는 isRouteErrorResponse 로 잡지못하는 것 같음.)
+   * loader 에서 던지는 에러는 isRouterErrorResponse 로 인식한다.
+   *
+   * @see https://reactrouter.com/en/main/utils/is-route-error-response
    **/
   if (isRouteErrorResponse(error)) {
     console.log({ error });
@@ -30,10 +33,10 @@ const AppErrorPage = () => {
     );
   }
 
-  /** Runtime Error */
+  /** Default Error */
   return (
     <div>
-      <h1>{DEFAULT_ERROR_MESSAGE}</h1>
+      <h1>{(error as Error)?.['message'] ?? DEFAULT_ERROR_MESSAGE}</h1>
     </div>
   );
 };
